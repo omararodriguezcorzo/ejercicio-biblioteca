@@ -13,7 +13,8 @@ public class Administrador extends Usuario {
     StringBuilder mensaje = new StringBuilder();
 
      public void registrarCliente(Cliente cliente){
-         mensaje.append("ID DEL USUARIO")
+         mensaje.append("DATOS DEL CLIENTE: ")
+                 .append("ID DEL USUARIO")
                  .append(cliente.getId())
                  .append("\nNombre del cliente: ")
                  .append(cliente.getNombre())

@@ -20,9 +20,11 @@ public class Main {
         do {
             System.out.println(" *********** BIENVENIDOS A LA BIBLIOTECA: MUNDOS MÁGICOS *********** ");
             System.out.println("¿Qué deseas hacer?: ");
-            System.out.println("1. Registrar cliente. \n2. Registrar libro. \n3. Registrar préstamo. \n4. Salir de la biblioteca.");
+            System.out.println("""
+                    1. Registrar cliente. \n2. Registrar libro. \n3. Registrar préstamo. \n4. Salir de la biblioteca.
+                    """);
             opcion = scanner.nextByte();
-
+            
             switch (opcion){
                 case 1: {
                     RegistrarCliente registro = new RegistrarCliente(scanner);
@@ -48,7 +50,11 @@ public class Main {
                     System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
                     break;
                 }
+                default: {
+                    System.out.println("Opción no válida. Por favor, elige una opción del 1 al 4.");
+                    break;
+                }
             }
-        }while (true);
+        }while (opcion != 4);
     }
 }
