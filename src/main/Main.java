@@ -47,6 +47,9 @@ public class Main {
                     break;
                 }
                 case 4: {
+                    System.out.println();
+                }
+                case 5: {
                     System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
                     break;
                 }
