@@ -28,7 +28,6 @@ public class RegistrarLibro {
         System.out.print("Está disponible: ");
         boolean disponible = scanner.nextBoolean();
 
-        Libro libro = new Libro(isbn, titulo, autor, disponible);
-        return libro;
+        return new Libro(isbn, titulo, autor, disponible);
     }
 }

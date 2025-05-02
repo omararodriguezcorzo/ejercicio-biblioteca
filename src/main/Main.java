@@ -20,7 +20,7 @@ public class Main {
         do {
             System.out.println(" *********** BIENVENIDOS A LA BIBLIOTECA: MUNDOS MÁGICOS *********** ");
             System.out.println("¿Qué deseas hacer?: ");
-            System.out.println("""
+            System.out.println(""" 
                     1. Registrar cliente. \n2. Registrar libro. \n3. Registrar préstamo. \n4. Salir de la biblioteca.
                     """);
             opcion = scanner.nextByte();
