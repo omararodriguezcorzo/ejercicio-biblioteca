@@ -1,28 +1,40 @@
 package administradores;
 
 import clientes.Cliente;
+
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class RegistrarCliente {
     private Scanner scanner;
+    private int contadorId = 1;
 
     public RegistrarCliente(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    public Cliente registrarCliente(){
-        System.out.println("---------------- REGISTRO PARA CLIENTE ----------------");
+    public ArrayList<Cliente> registrarCliente(){
+        ArrayList<Cliente>clientes = new ArrayList<>();
+        while (true){
+            System.out.println("---------------- REGISTRO PARA CLIENTE ----------------");
+            int id = contadorId++;
 
-        System.out.print("Ingrese el ID: ");
-        int id = scanner.nextInt();
+            System.out.print("Ingrese el nombre: ");
+            String nombre = scanner.next();
 
-        System.out.print("Ingrese el nombre: ");
-        String nombre = scanner.next();
+            System.out.print("Ingrese el correo: ");
+            String correo = scanner.next();
 
-        System.out.print("Ingrese el correo: ");
-        String correo = scanner.next();
+            clientes.add(new Cliente(id, nombre, correo));
 
-        Cliente cliente = new Cliente(id, nombre, correo);
-        return cliente;
+            System.out.println("¿Quieres registrar más usuarios?: s/n");
+            char respuesta = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
+
+            if (respuesta != 's') {
+                break;
+            }
+        }
+        return clientes;
     }
 }

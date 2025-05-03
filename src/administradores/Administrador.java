@@ -38,9 +38,13 @@ public class Administrador extends Usuario {
      }
 
      public void RegistrarPrestamo(Prestamo prestamo){
-         System.out.println("ISBN: " + prestamo.getLibro().getIsbn() + ".\nTítulo: " + prestamo.getLibro().getTitulo() + ".\nAutor: " + prestamo.getLibro().getAutor() + ".\nDisponible: " + prestamo.getLibro().getDisponible());
-         System.out.println("Id: " + prestamo.getUsuario().getId() + ".\nNombre: " + prestamo.getUsuario().getNombre() + ".\nCorreo: " + prestamo.getUsuario().getCorreo());
-         System.out.println("Fehca del prestamo: " + prestamo.getFechaDeInicio() + "\nFecha de devolución: " + prestamo.getFechaDeDevolucion());
+         mensaje.append("Fecha de inicio: ")
+                 .append(prestamo.getFechaDeInicio())
+                 .append("\n Fecha de devolución: ")
+                 .append(prestamo.getFechaDeDevolucion())
+                 .append("\nEstado del prestamo: ")
+                 .append(prestamo.getEstado());
+         System.out.println(mensaje.toString());
          System.out.println("El prestamo registrado con éxito.");
      }
 }
