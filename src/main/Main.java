@@ -8,6 +8,7 @@ import clientes.Cliente;
 import libros.Libro;
 import prestamos.Prestamo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -21,21 +22,24 @@ public class Main {
             System.out.println(" *********** BIENVENIDOS A LA BIBLIOTECA: MUNDOS MÁGICOS *********** ");
             System.out.println("¿Qué deseas hacer?: ");
             System.out.println(""" 
-                    1. Registrar cliente. \n2. Registrar libro. \n3. Registrar préstamo. \n4. Salir de la biblioteca.
+                    1. Registrar cliente.
+                    2. Registrar libro.
+                    3. Registrar préstamo.
+                    4. Salir de la biblioteca.
                     """);
             opcion = scanner.nextByte();
             
             switch (opcion){
                 case 1: {
                     RegistrarCliente registro = new RegistrarCliente(scanner);
-                    Cliente cliente = registro.registrarCliente();
-                    admin1.registrarCliente(cliente);
+                    ArrayList<Cliente> clientes = registro.registrarCliente();
+                    admin1.registrarCliente(clientes);
                     break;
                 }
                 case 2: {
                     RegistrarLibro registro = new RegistrarLibro(scanner);
-                    Libro libro = registro.registrarLibro();
-                    admin1.registrarLibro(libro);
+                    ArrayList<Libro> libros = registro.registrarLibro();
+                    admin1.registrarLibro(libros);
                     break;
                 }
                 case 3: {

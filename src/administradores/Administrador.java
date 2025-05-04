@@ -5,65 +5,47 @@ import libros.Libro;
 import prestamos.Prestamo;
 import usuarios.Usuario;
 
-import java.util.HashMap;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class Administrador extends Usuario {
-    private HashMap<Integer, Cliente> clientes = new HashMap<>();
-    private HashMap<String, Libro> libros = new HashMap<>();
-    private HashMap<Integer, Prestamo> prestamos = new HashMap<>();
-    private int contadorPrestamos = 0;
+    private ArrayList<Cliente>clientes;
+    private ArrayList<Libro>libros;
+    private ArrayList<Prestamo>prestamos;
 
     public Administrador(int id, String nombre, String correo) {
         super(id, nombre, correo);
+        this.clientes = new ArrayList<>();
+        this.libros = new ArrayList<>();
+        this.prestamos = new ArrayList<>();
     }
 
-    StringBuilder mensaje = new StringBuilder();
-
-     public void registrarCliente(Cliente cliente){
-         clientes.put(cliente.getId(), cliente);
-         mensaje.append("DATOS DEL CLIENTE: ")
-                 .append("ID DEL USUARIO")
-                 .append(cliente.getId())
-                 .append("\nNombre del cliente: ")
-                 .append(cliente.getNombre())
-                 .append("\nCorreo del cliente: ")
-                 .append(cliente.getCorreo());
-         System.out.println(mensaje.toString());
+     public void registrarCliente(ArrayList<Cliente> nuevosClientes){
+         for (Cliente c: nuevosClientes){
+             this.clientes.add(c);
+             System.out.printf("""
+                     Clientes registrados: ID: %d, Nombre: %s, Correo: %s%n""",
+                     c.getId(), c.getNombre(), c.getCorreo());
+         }
          System.out.println("Ha sido registrado con éxito");
      }
 
-     public void registrarLibro(Libro libro){
-         libros.put(libro.getIsbn(), libro);
-         mensaje.append("ISBN: ")
-                 .append(libro.getIsbn())
-                 .append("\nTítulo: ")
-                 .append(libro.getTitulo())
-                 .append("\nAutor: ")
-                 .append(libro.getAutor())
-                 .append("\nDisponible: ")
-                 .append(libro.getDisponible());
-         System.out.println(mensaje.toString());
-         System.out.println("Libro registrado con éxito.");
+     public void registrarLibro(ArrayList<Libro>libros){
+         for (Libro l: libros){
+             this.libros.add(l);
+             System.out.printf("""
+                     Libros registrados: ISBN: %s, Título: %s, Autor: %s, Disponible: %b%n""",
+                     l.getIsbn(), l.getTitulo(), l.getAutor(), l.getDisponible());
+         }
+         System.out.println("Libros registrados con éxito.");
      }
 
      public void RegistrarPrestamo(Prestamo prestamo){
-         contadorPrestamos++;
-         prestamos.put(contadorPrestamos, prestamo);
-         mensaje.append("DATOS DEL PRÉSTAMO:\n")
-                 // DATOS DEL LIBRO
-                 .append("\nISBN: ").append(prestamo.getLibro().getIsbn())
-                 .append("\nTítulo: ").append(prestamo.getLibro().getTitulo())
-                 .append("\nAutor: ").append(prestamo.getLibro().getAutor())
-                 .append("\nDisponible: ").append(prestamo.getLibro().getDisponible())
-                 // DATOS DEL CLIENTE
-                 .append("\nCliente ID: ").append(prestamo.getUsuario().getId())
-                 .append("\nCliente Nombre: ").append(prestamo.getUsuario().getNombre())
-                 .append("\nCorreo Cliente: ").append(prestamo.getUsuario().getCorreo())
-                 // DATOS DEL PRESTAMOS
-                 .append("\nFecha de inicio: ").append(prestamo.getFechaDeInicio())
-                 .append("\nFecha de devolución: ").append(prestamo.getFechaDeDevolucion())
-                 .append("ID Préstamo: ").append(contadorPrestamos);
-         System.out.println(mensaje.toString());
-         System.out.println("El préstamo fue registrado con éxito.");
+        this.prestamos.add(prestamo);
+        prestamo.getLibro().setDisponible(false);
+         System.out.printf("""
+                 Préstamo: ID del cliente: %d; Título del libro: %s, Autor: %s; Fecha de inicio: %s, Fecha de devolución: %s%n""",
+                 prestamo.getUsuario().getId(), prestamo.getLibro().getTitulo(), prestamo.getLibro().getAutor(), prestamo.getFechaDeInicio(), prestamo.getFechaDeDevolucion());
+        System.out.println("El préstamo fue registrado con éxito.");
      }
 }

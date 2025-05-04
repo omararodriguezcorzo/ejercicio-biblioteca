@@ -2,6 +2,8 @@ package administradores;
 
 import libros.Libro;
 
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class RegistrarLibro {
@@ -11,23 +13,34 @@ public class RegistrarLibro {
         this.scanner = scanner;
     }
 
-    public Libro registrarLibro(){
-        System.out.println("---------------- REGISTRO PARA LIBRO ----------------");
+    public ArrayList<Libro> registrarLibro(){
+        ArrayList<Libro> libros = new ArrayList<>();
 
-        scanner.nextLine();
+        while (true){
+            System.out.println("---------------- REGISTRO PARA LIBRO ----------------");
+            scanner.nextLine();
 
-        System.out.print("Ingrese el ISBN: ");
-        String isbn = scanner.nextLine();
+            System.out.print("Ingrese el ISBN: ");
+            String isbn = scanner.nextLine();
 
-        System.out.print("Ingrese título del libro: ");
-        String titulo = scanner.nextLine();
+            System.out.print("Ingrese título del libro: ");
+            String titulo = scanner.nextLine();
 
-        System.out.print("Ingrese el autor: ");
-        String autor = scanner.nextLine();
+            System.out.print("Ingrese el autor: ");
+            String autor = scanner.nextLine();
 
-        System.out.print("Está disponible: ");
-        boolean disponible = scanner.nextBoolean();
+            System.out.print("Está disponible: ");
+            boolean disponible = scanner.nextBoolean();
 
-        return new Libro(isbn, titulo, autor, disponible);
+            libros.add(new Libro(isbn, titulo, autor, disponible));
+
+            System.out.println("¿Quiere registrar más libros?: ");
+            char respuesta = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
+
+            if (respuesta != 's'){
+                break;
+            }
+        }
+        return libros;
     }
 }
