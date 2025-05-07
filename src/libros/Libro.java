@@ -6,9 +6,9 @@ public class Libro {
     private String autor;
     private boolean disponible;
 
-    public Libro(String isbn, String titutlo, String autor, boolean disponible) {
+    public Libro(String isbn, String tituto, String autor, boolean disponible) {
         this.isbn = isbn;
-        this.titulo = titutlo;
+        this.titulo = tituto;
         this.autor = autor;
         this.disponible = disponible;
     }

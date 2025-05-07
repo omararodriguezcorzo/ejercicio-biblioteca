@@ -1,67 +1,51 @@
 package main;
 
-import administradores.Administrador;
-import administradores.RegistrarCliente;
-import administradores.RegistrarLibro;
-import administradores.RegistrarPrestamo;
-import clientes.Cliente;
-import libros.Libro;
-import prestamos.Prestamo;
+import administradores.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Registros registro = new Registros(scanner);
 
-        Administrador admin1 = new Administrador(1, "Omar", "xxx@xxx.com");
+        Administrador admin1 = new Administrador(1, "Xxxxx Xxxxx", "xxx@xxx.xxx");
         byte opcion = 0;
 
         do {
             System.out.println(" *********** BIENVENIDOS A LA BIBLIOTECA: MUNDOS MÁGICOS *********** ");
             System.out.println("¿Qué deseas hacer?: ");
-            System.out.println(""" 
+            System.out.print(""" 
                     1. Registrar cliente.
                     2. Registrar libro.
                     3. Registrar préstamo.
                     4. Salir de la biblioteca.
                     """);
             opcion = scanner.nextByte();
+            scanner.nextLine();
             
             switch (opcion){
-                case 1: {
-                    RegistrarCliente registro = new RegistrarCliente(scanner);
-                    ArrayList<Cliente> clientes = registro.registrarCliente();
+                case 1 -> {
+                    var clientes = registro.registrarClientes();
                     admin1.registrarCliente(clientes);
-                    break;
                 }
-                case 2: {
-                    RegistrarLibro registro = new RegistrarLibro(scanner);
-                    ArrayList<Libro> libros = registro.registrarLibro();
+                case 2 -> {
+                    var libros = registro.registrarLibro();
                     admin1.registrarLibro(libros);
-                    break;
                 }
-                case 3: {
-                    RegistrarPrestamo registro = new RegistrarPrestamo(scanner);
-                    Cliente cliente = new Cliente(2, "Ana", "ana@email.com");
-                    Libro libro = new Libro("9876543210", "El Principito", "Saint-Exupéry", true);
-                    Prestamo prestamo = registro.registrarPrestamo(libro, cliente);
-                    admin1.RegistrarPrestamo(prestamo);
-                    break;
+                case 3 -> {
+                    var prestamo = registro.registrarPrestamo(admin1.getClientes(), admin1.getLibros());
+                    if (prestamo != null){
+                        admin1.RegistrarPrestamo(prestamo);
+                    }else {
+                        System.out.println("Préstamo cancelado.");
+                    }
                 }
-                case 4: {
-                    System.out.println();
-                }
-                case 5: {
-                    System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
-                    break;
-                }
-                default: {
-                    System.out.println("Opción no válida. Por favor, elige una opción del 1 al 4.");
-                    break;
-                }
+                case 4-> System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
+
+                default -> System.out.println("Opción no válida. Por favor, elige una opción del 1 al 4.");
             }
         }while (opcion != 4);
+        scanner.close();
     }
 }

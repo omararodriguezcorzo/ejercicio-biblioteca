@@ -5,13 +5,14 @@ import libros.Libro;
 import prestamos.Prestamo;
 import usuarios.Usuario;
 
-import java.lang.reflect.Array;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Administrador extends Usuario {
-    private ArrayList<Cliente>clientes;
-    private ArrayList<Libro>libros;
-    private ArrayList<Prestamo>prestamos;
+    private List<Cliente>clientes;
+    private List<Libro>libros;
+    private List<Prestamo>prestamos;
 
     public Administrador(int id, String nombre, String correo) {
         super(id, nombre, correo);
@@ -20,32 +21,56 @@ public class Administrador extends Usuario {
         this.prestamos = new ArrayList<>();
     }
 
-     public void registrarCliente(ArrayList<Cliente> nuevosClientes){
-         for (Cliente c: nuevosClientes){
-             this.clientes.add(c);
+     public void registrarCliente(List<Cliente> clientes){
+        this.clientes.addAll(clientes);
+         System.out.println("Cliente/s registrado/s: ");
+         for (Cliente c: clientes){
              System.out.printf("""
-                     Clientes registrados: ID: %d, Nombre: %s, Correo: %s%n""",
+                     \tID: %d, Nombre: %s, Correo: %s%n""",
                      c.getId(), c.getNombre(), c.getCorreo());
          }
          System.out.println("Ha sido registrado con éxito");
      }
 
-     public void registrarLibro(ArrayList<Libro>libros){
+     public void registrarLibro(List<Libro>libros){
+        this.libros.addAll(libros);
+         System.out.println("Libro/s registrado/s: ");
          for (Libro l: libros){
-             this.libros.add(l);
              System.out.printf("""
-                     Libros registrados: ISBN: %s, Título: %s, Autor: %s, Disponible: %b%n""",
-                     l.getIsbn(), l.getTitulo(), l.getAutor(), l.getDisponible());
+                             \tISBN: %s, Título: %s, Autor: %s, Disponible: %b
+                             """,
+                            l.getIsbn(), l.getTitulo(), l.getAutor(), l.getDisponible());
          }
          System.out.println("Libros registrados con éxito.");
      }
 
      public void RegistrarPrestamo(Prestamo prestamo){
         this.prestamos.add(prestamo);
+         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         prestamo.getLibro().setDisponible(false);
-         System.out.printf("""
-                 Préstamo: ID del cliente: %d; Título del libro: %s, Autor: %s; Fecha de inicio: %s, Fecha de devolución: %s%n""",
-                 prestamo.getUsuario().getId(), prestamo.getLibro().getTitulo(), prestamo.getLibro().getAutor(), prestamo.getFechaDeInicio(), prestamo.getFechaDeDevolucion());
+        System.out.println("----- PRÉSTAMO REALIZADO CON ÉXITO -----");
+        System.out.printf("""
+                ID del cliente: %d;
+                Título del libro: %s
+                Autor: %s
+                Fecha de inicio: %s
+                Fecha de devolución: %s
+                Estado del préstamo: %s%n
+                """,
+                 prestamo.getUsuario().getId(),
+                 prestamo.getLibro().getTitulo(),
+                 prestamo.getLibro().getAutor(),
+                 prestamo.getFechaDeInicio().format(formatoFecha),
+                 prestamo.getFechaDeDevolucion().format(formatoFecha),
+                 prestamo.getEstado());
         System.out.println("El préstamo fue registrado con éxito.");
      }
+
+     public List<Cliente> getClientes(){
+        return clientes;
+     }
+
+    public List<Libro> getLibros(){
+        return libros;
+    }
 }
