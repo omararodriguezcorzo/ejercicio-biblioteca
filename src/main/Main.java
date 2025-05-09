@@ -47,7 +47,7 @@ public class Main {
                 System.out.println("Lista de préstamos: ");
                 int ind = 1;
                 for (Prestamo p : admin1.getPrestamos()) {
-                    System.out.println((ind++) +"). "+ p.getUsuario().getNombre() + p.getLibro().getTitulo() + "-" + p.getLibro().getAutor());
+                    System.out.println((ind++) +"). Cliente: "+ p.getUsuario().getNombre() + ", Libro: "+ p.getLibro().getTitulo() + "-" + p.getLibro().getAutor());
                 }
             }
             case 5-> System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
