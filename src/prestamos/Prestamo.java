@@ -3,16 +3,17 @@ package prestamos;
 import libros.Libro;
 import usuarios.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Prestamo {
-    private Date fechaDeInicio;
-    private Date fechaDeDevolucion;
-    private String estado;
+    private LocalDateTime fechaDeInicio;
+    private LocalDateTime fechaDeDevolucion;
+    private boolean estado;
     private Libro libro;
     private Usuario usuario;
 
-    public Prestamo(Date fechaInicio, Date fechaDeDevolucion, String estado, Libro libro, Usuario usuario) {
+    public Prestamo(LocalDateTime fechaInicio, LocalDateTime fechaDeDevolucion, boolean estado, Libro libro, Usuario usuario) {
         this.fechaDeInicio = fechaInicio;
         this.fechaDeDevolucion = fechaDeDevolucion;
         this.estado = estado;
@@ -20,27 +21,27 @@ public class Prestamo {
         this.usuario = usuario;
     }
 
-    public Date getFechaDeInicio() {
+    public LocalDateTime getFechaDeInicio() {
         return fechaDeInicio;
     }
 
-    public void setFechaDeInicio(Date fechaDeInicio) {
+    public void setFechaDeInicio(LocalDateTime fechaDeInicio) {
         this.fechaDeInicio = fechaDeInicio;
     }
 
-    public Date getFechaDeDevolucion() {
+    public LocalDateTime getFechaDeDevolucion() {
         return fechaDeDevolucion;
     }
 
-    public void setFechaDeDevolucion(Date fechaDeDevolucion) {
+    public void setFechaDeDevolucion(LocalDateTime fechaDeDevolucion) {
         this.fechaDeDevolucion = fechaDeDevolucion;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
