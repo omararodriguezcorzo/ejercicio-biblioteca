@@ -71,7 +71,12 @@ public class Registros {
     }
 
     public Prestamo registrarPrestamo(List<Cliente> clientes, List<Libro> libros) {
-        System.out.println("---------------- REGISTRO PARA LIBROS ----------------");
+        System.out.println("---------------- REGISTRO PARA PRÉSTAMO ----------------");
+
+        if (clientes.isEmpty() || libros.stream().noneMatch(Libro::getDisponible)) {
+            System.out.println("No hay usuarios o libros disponibles para asignar un préstamo.");
+            return null;
+        }
 
         Cliente cliente = seleccionarCliente(clientes);
         if (cliente == null) return null;

@@ -46,7 +46,7 @@ public class Administrador extends Usuario {
 
      public void RegistrarPrestamo(Prestamo prestamo){
         this.prestamos.add(prestamo);
-         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         prestamo.getLibro().setDisponible(false);
         System.out.println("----- PRÉSTAMO REALIZADO CON ÉXITO -----");
         System.out.printf("""
@@ -65,12 +65,12 @@ public class Administrador extends Usuario {
                  prestamo.getEstado());
         System.out.println("El préstamo fue registrado con éxito.");
      }
-
      public List<Cliente> getClientes(){
         return clientes;
      }
 
-    public List<Libro> getLibros(){
-        return libros;
+    public List<Libro> getLibros() { return libros; }
+    public List<Prestamo> getPrestamos(){
+        return prestamos;
     }
 }

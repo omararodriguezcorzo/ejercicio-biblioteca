@@ -1,6 +1,7 @@
 package main;
 
 import administradores.*;
+import prestamos.Prestamo;
 
 import java.util.Scanner;
 
@@ -16,36 +17,42 @@ public class Main {
             System.out.println(" *********** BIENVENIDOS A LA BIBLIOTECA: MUNDOS MÁGICOS *********** ");
             System.out.println("¿Qué deseas hacer?: ");
             System.out.print(""" 
-                    1. Registrar cliente.
-                    2. Registrar libro.
-                    3. Registrar préstamo.
-                    4. Salir de la biblioteca.
-                    """);
+                1. Registrar cliente.
+                2. Registrar libro.
+                3. Registrar préstamo.
+                4. Ver préstamos
+                5. Salir de la biblioteca.
+                """);
             opcion = scanner.nextByte();
             scanner.nextLine();
-            
-            switch (opcion){
-                case 1 -> {
-                    var clientes = registro.registrarClientes();
-                    admin1.registrarCliente(clientes);
-                }
-                case 2 -> {
-                    var libros = registro.registrarLibro();
-                    admin1.registrarLibro(libros);
-                }
-                case 3 -> {
-                    var prestamo = registro.registrarPrestamo(admin1.getClientes(), admin1.getLibros());
-                    if (prestamo != null){
-                        admin1.RegistrarPrestamo(prestamo);
-                    }else {
-                        System.out.println("Préstamo cancelado.");
-                    }
-                }
-                case 4-> System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
 
-                default -> System.out.println("Opción no válida. Por favor, elige una opción del 1 al 4.");
+        switch (opcion){
+            case 1 -> {
+                var clientes = registro.registrarClientes();
+                admin1.registrarCliente(clientes);
             }
-        }while (opcion != 4);
-        scanner.close();
+            case 2 -> {
+                var libros = registro.registrarLibro();
+                admin1.registrarLibro(libros);
+            }
+            case 3 -> {
+                var prestamo = registro.registrarPrestamo(admin1.getClientes(), admin1.getLibros());
+                if (prestamo != null){
+                    admin1.RegistrarPrestamo(prestamo);
+                }else {
+                    System.out.println("Préstamo cancelado.");
+                }
+            }
+            case 4 -> {
+                System.out.println("Lista de préstamos: ");
+                int ind = 1;
+                for (Prestamo p : admin1.getPrestamos()) {
+                    System.out.println((ind++) +"). "+ p.getUsuario().getNombre() + p.getLibro().getTitulo() + "-" + p.getLibro().getAutor());
+                }
+            }
+            case 5-> System.out.println("Gracias por visitarnos. ¡Hasta pronto!");
+            default -> System.out.println("Opción no válida. Por favor, elige una opción del 1 al 4.");
+            }
+        }while (opcion != 5);
     }
 }
